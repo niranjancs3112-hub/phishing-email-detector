@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Phishing Email Detector</title>
+
+    <style>
+        .how-it-works {
+    margin-top: 25px;
+    padding: 20px;
+    background: #f5f5f5;
+    border-radius: 12px;
+}
+
+.how-it-works h2 {
+    margin-top: 0;
+}
+
+.steps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+}
+
+.step {
+    flex: 1;
+    min-width: 200px;
+    padding: 15px;
+    background: white;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.step h3 {
+    margin-top: 5px;
+}
+        .confidence-bar {
+    width: 100%;
+    height: 25px;
+    background: #ddd;
+    border-radius: 15px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.confidence-fill {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    background: #4CAF50;
+    border-radius: 15px;
+}
+        .confusion-container {
+    margin-top: 25px;
+    padding: 20px;
+    background: #f5f5f5;
+    border-radius: 12px;
+}
+
+.confusion-container h2 {
+    margin-top: 0;
+}
+
+.confusion-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+.confusion-table th,
+.confusion-table td {
+    padding: 15px;
+    border: 1px solid #ddd;
+}
+
+.confusion-table th {
+    font-weight: bold;
+}
+
+.confusion-table td {
+    font-size: 20px;
+    font-weight: bold;
+}
+      body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
+
+
+* {
+    box-sizing: border-box;
+}
+        .footer {
+    margin-top: 30px;
+    padding: 20px;
+    background: #222;
+    color: white;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.footer h3 {
+    margin: 5px 0 10px;
+}
+
+.footer p {
+    margin: 5px 0;
+    font-size: 14px;
+}
+        .project-info {
+    margin-top: 25px;
+    padding: 20px;
+    background: #f5f5f5;
+    border-radius: 12px;
+}
+
+.project-info h2 {
+    margin-top: 0;
+}
+
+.tech-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.tech-list div {
+    padding: 10px 15px;
+    background: white;
+    border-radius: 8px;
+    font-weight: bold;
+}
+        .chart-container {
+    margin-top: 25px;
+    padding: 20px;
+    background: #f5f5f5;
+    border-radius: 12px;
+}
+
+.chart-container h2 {
+    margin-top: 0;
+}
+        .history {
+    margin-top: 25px;
+    padding: 20px;
+    background: #f5f5f5;
+    border-radius: 12px;
+}
+
+.history h2 {
+    margin-top: 0;
+}
+
+.history-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 15px;
+    margin: 10px 0;
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.history-email {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.5;
+    word-break: break-word;
+}
+
+.history-item span {
+    font-size: 14px;
+}
+     .stats {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 20px 0;
+    width: 100%;
+}
+
+.stat-card {
+    flex: 1;
+    max-width: 300px;
+    padding: 20px;
+    background: #f5f5f5;
+    border-radius: 12px;
+    text-align: center;
+}
+@media (max-width: 700px) {
+    .stats {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .stat-card {
+        width: 100%;
+    }
+}
+.stat-card h3 {
+    margin: 5px;
+}
+
+.stat-card p {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 10px;
+}
+        .accuracy {
+    margin: 15px 0;
+    padding: 10px;
+    background: #f0f0ff;
+    border-radius: 8px;
+    font-weight: bold;
+}
+.dataset {
+    margin: 10px 0 20px;
+    padding: 10px;
+    background: #f5f5f5;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+    width: 90%;
+    max-width: 850px;
+    margin: 30px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 20px;
+    box-sizing: border-box;
+    display: block;
+}
+        
+        h1 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 200px;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            resize: vertical;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 14px 35px;
+            border: none;
+            border-radius: 10px;
+            background: #667eea;
+            color: white;
+            font-size: 17px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #5568d9;
+        }
+
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 12px;
+        }
+
+        .phishing {
+            background: #ffe5e5;
+            border: 2px solid #ff4d4d;
+            color: #cc0000;
+        }
+
+        .safe {
+            background: #e5ffe9;
+            border: 2px solid #28a745;
+            color: #16852d;
+        }
+
+        .result h2 {
+            margin: 0 0 10px;
+        }
+
+        .footer {
+            margin-top: 25px;
+            font-size: 13px;
+            color: #888;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>📧 Phishing Email Detector</h1>
+        <div class="accuracy">
+    🎯 Model Accuracy: {{ accuracy }}%
+</div>
+<div class="dataset">
+    📊 Dataset: {{ total_emails }} Emails
+</div>
+<div class="stats">
+    <div class="stat-card">
+        <h3>🚨 Phishing Emails</h3>
+        <p>{{ phishing_emails }}</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>✅ Safe Emails</h3>
+        <p>{{ safe_emails }}</p>
+    </div>
+        <div class="stat-card">
+        <h3>🔍 Predictions Made</h3>
+        <p>{{ total_predictions }}</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>🚨 Phishing Predictions</h3>
+        <p>{{ phishing_predictions }}</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>✅ Safe Predictions</h3>
+        <p>{{ safe_predictions }}</p>
+    </div>
+</div>
+
+        <p class="subtitle">
+            Check whether an email is safe or potentially phishing.
+        </p>
+
+        <form method="POST">
+
+            <textarea
+                name="email"
+                placeholder="Paste the email content here..."
+                required></textarea>
+
+            <br>
+
+            <button type="submit">
+    🔍 Check Email
+</button>
+
+<button type="button" onclick="clearEmail()">
+    🧹 Clear
+</button>
+
+        </form>
+
+
+        {% if result == "PHISHING" %}
+
+            <div class="result phishing">
+
+                <h2>🚨 PHISHING EMAIL DETECTED</h2>
+
+                <p>
+                    This email appears suspicious.
+                    Be careful before clicking links or providing information.
+                </p>
+                <p>🔗 URLs found: {{ url_count }}</p>
+<p>⚠️ Suspicious keywords: {{ keyword_count }}</p>
+<p>🎯 Confidence: {{ confidence }}%</p>
+<div class="confidence-bar">
+    <div class="confidence-fill" style="width: {{ confidence }}%;">
+        {{ confidence }}%
+    </div>
+</div>
+<p>🤖 Model: Logistic Regression</p>
+
+            </div>
+
+        {% elif result == "SAFE" %}
+
+            <div class="result safe">
+
+                <h2>✅ SAFE EMAIL</h2>
+
+                <p>
+                    This email appears to be legitimate.
+                </p>
+                <p>🔗 URLs found: {{ url_count }}</p>
+<p>⚠️ Suspicious keywords: {{ keyword_count }}</p>
+<p>🎯 Confidence: {{ confidence }}%</p>
+<div class="confidence-bar">
+    <div class="confidence-fill" style="width: {{ confidence }}%;">
+        {{ confidence }}%
+    </div>
+</div>
+<p>🤖 Model: Logistic Regression</p>
+
+            </div>
+
+        {% endif %}
+
+
+        <div class="footer">
+
+            Machine Learning Based Phishing Email Detection
+
+        </div>
+
+    
+    {% if history %}
+    <div class="history">
+        <h2>📋 Prediction History</h2>
+        <a href="/clear-history">
+    <button type="button">🗑️ Clear History</button>
+</a>
+
+        {% for item in history %}
+            <div class="history-item">
+                <span>
+                    {% if item.result == "PHISHING" %}
+                        🚨 PHISHING
+                    {% else %}
+                        ✅ SAFE
+                    {% endif %}
+                </span>
+                <div class="history-email">
+    {{ item.email }}
+</div>
+                <span>
+                    Confidence: {{ item.confidence }}%
+                </span>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
+<script>
+function clearEmail() {
+    document.querySelector("textarea").value = "";
+}
+</script>
+<script>
+
+function clearEmail() {
+    document.querySelector("textarea").value = "";
+}
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<div class="chart-container">
+    <h2>📊 Dataset Distribution</h2>
+    <canvas id="emailChart"></canvas>
+</div>
+<div class="confusion-container">
+    <h2>🎯 Confusion Matrix</h2>
+
+   <table class="confusion-table">
+        <tr>
+            <th></th>
+            <th>Predicted Safe</th>
+            <th>Predicted Phishing</th>
+        </tr>
+
+        <tr>
+            <th>Actual Safe</th>
+            <td>{{ confusion_matrix.true_safe }}</td>
+            <td>{{ confusion_matrix.false_phishing }}</td>
+        </tr>
+
+        <tr>
+            <th>Actual Phishing</th>
+            <td>{{ confusion_matrix.false_safe }}</td>
+            <td>{{ confusion_matrix.true_phishing }}</td>
+        </tr>
+    </table>
+</div>
+
+<script>
+const ctx = document.getElementById("emailChart");
+
+new Chart(ctx, {
+    type: "bar",
+    data: {
+        labels: ["Phishing Emails", "Safe Emails"],
+        datasets: [{
+            label: "Number of Emails",
+            data: [{{ phishing_emails }}, {{ safe_emails }}]
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+</script>
+<div class="how-it-works">
+    <h2>⚙️ How It Works</h2>
+
+    <div class="steps">
+        <div class="step">
+            <h3>1️⃣ Enter Email</h3>
+            <p>Paste the email message into the text box.</p>
+        </div>
+
+        <div class="step">
+            <h3>2️⃣ Analyze Text</h3>
+            <p>TF-IDF extracts important features from the email.</p>
+        </div>
+
+        <div class="step">
+            <h3>3️⃣ Machine Learning</h3>
+            <p>Logistic Regression analyzes the extracted features.</p>
+        </div>
+
+        <div class="step">
+            <h3>4️⃣ Get Result</h3>
+            <p>The system predicts whether the email is SAFE or PHISHING.</p>
+        </div>
+    </div>
+</div>
+<div class="project-info">
+    <h2>🤖 About This Project</h2>
+
+    <p>
+        This system uses Machine Learning to detect whether an email
+        is likely to be phishing or safe.
+    </p>
+
+    <div class="tech-list">
+        <div>🐍 Python</div>
+        <div>🧠 Scikit-learn</div>
+        <div>📊 TF-IDF</div>
+        <div>📈 Logistic Regression</div>
+        <div>🌐 Flask</div>
+        <div>💻 HTML & CSS</div>
+    </div>
+</div>
+<footer class="footer">
+    <h3>📧 Phishing Email Detection System</h3>
+    <p>Machine Learning Based Email Security</p>
+    <p>Built using Python, Scikit-learn and Flask</p>
+    <p>Model: Logistic Regression | Accuracy: {{ accuracy }}%</p>
+</footer>
+
+</div>
+
+</body>
+</html>

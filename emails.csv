@@ -1,0 +1,19 @@
+text,label
+"Congratulations! You won a prize. Click here to claim your reward now.",Phishing
+"Please find attached the notes from today's class.",Safe
+"Urgent! Verify your bank account immediately using this link.",Phishing
+"Your assignment submission is due tomorrow.",Safe
+"Click here to reset your password immediately.",Phishing
+"Meeting is scheduled for 10 AM tomorrow.",Safe
+"Your account has been suspended. Verify your details now.",Phishing
+"Please send me the project report before Friday.",Safe
+"Congratulations! You have won a lottery. Claim your money now.",Phishing
+"Here are the lecture notes for today's subject.",Safe
+"Urgent security alert! Login and verify your account.",Phishing
+"Your examination timetable has been uploaded.",Safe
+"Click the link to confirm your bank account.",Phishing
+"Please attend the department meeting at 2 PM.",Safe
+"Your password will expire. Click here to update it.",Phishing
+"Your lab record has been checked successfully.",Safe
+"Important! Confirm your account information immediately.",Phishing
+"Please submit your assignment before the deadline.",Safe
